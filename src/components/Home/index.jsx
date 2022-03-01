@@ -22,7 +22,15 @@ const Home = () => {
     };
     getRandomPhotos();
   }, []);
-  console.log("resultat", Data);
+  
+  const [InputValue, setInputValue] = useState("");
+
+  const searshImage = async(e) => {
+    e.preventDefault()//man5alouch navigateur ya3mel relode
+    const resSearsh= await axios.get(`https://api.unsplash.com/search/photos?query=${InputValue}&client_id=mtHuH_DKfH41q5T-wV3oO_DpTiUv2GahJoaIiO7OyKc`);
+    setData(resSearsh.data.results);
+  };
+
   return (
     <div className="pt-10">
       <div className="text-center  text-sky-600 text-9xl font-sans antialiased font-semibold">
@@ -32,6 +40,7 @@ const Home = () => {
       <div className="input-group ">
         <div>
           <input
+          onChange={(e)=>setInputValue(e.target.value)}
             type="search"
             className="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             placeholder="search"
@@ -41,6 +50,7 @@ const Home = () => {
         </div>
         <div>
           <button
+            onClick={(e) => searshImage(e)}
             className="btn px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out flex items-center"
             type="button"
             id="button-addon2"
@@ -74,7 +84,9 @@ const Home = () => {
                   alt={img.user.name}
                   className="rounded-t-lg bg-cover w-full"
                 />
-                <figcaption className="text-center ">{img.user.name} +{img.likes}</figcaption>
+                <figcaption className="text-center ">
+                  {img.user.name} +{img.likes}
+                </figcaption>
               </div>
             </Link>
           );

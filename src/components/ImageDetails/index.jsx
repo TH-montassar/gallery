@@ -20,6 +20,8 @@ const ImageDetails = () => {
     getRandomDetails();
   }, [imageId]);
 
+
+
   useEffect(() => {
     const getRandomPhotos = async () => {
       const res = await axios.get(
@@ -32,6 +34,8 @@ const ImageDetails = () => {
     };
     getRandomPhotos();
   }, []);
+
+
 
   return Loading ? (
     <div> Loading</div>
@@ -52,6 +56,7 @@ const ImageDetails = () => {
             <h5> bio : {Image?.user?.bio}</h5> <h5> views: {Image.views}</h5>
             <h5> downloads : {Image.downloads}</h5>{" "}
             <h5> description : {Image.description}</h5>
+            <h5>  <a href={Image?.links?.download}> download</a> </h5>
           </div>
         </div>
       </div>
@@ -71,9 +76,13 @@ const ImageDetails = () => {
                 <figcaption className="text-center">{img.user.name}</figcaption>
               </div>
             </Link>
+            
+            
           );
         })}
       </div>
+
+      
     </Fragment>
   );
 };
