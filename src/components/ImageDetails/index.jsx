@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
-import { useParams,Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 const ImageDetails = () => {
   const { imageId } = useParams();
@@ -26,27 +26,27 @@ const ImageDetails = () => {
         "https://api.unsplash.com/photos?client_id=mtHuH_DKfH41q5T-wV3oO_DpTiUv2GahJoaIiO7OyKc"
       );
 
-     setImages(res.data);
+      setImages(res.data);
 
-     // console.log("resultat", res.data);
+      // console.log("resultat", res.data);
     };
     getRandomPhotos();
-  }, [])
-
-
-
-
+  }, []);
 
   return Loading ? (
     <div> Loading</div>
   ) : (
     <Fragment>
-      <div className="flex flex-col items-center justify-center  py-10 ">
-        <h1 className="py-10"> {Image?.user?.name}</h1>
+      <div className="flex flex-col items-center py-10 ">
+        <h1 className="py-10 font-serif text-8xl antialiased font-extrabold tracking-widest"> {Image?.user?.name}</h1>
 
-        <div className="bg-gray-50 box-border rounded-3xl  max-w-7xl flex flex-row flex-wrap items-center justify-center">
+        <div className="bg-neutral-50 rounded-3xl w-2/3 flex flex-row flex-wrap">
           <div className="">
-            <img className="img rounded-l-lg bg-cover" src={Image?.urls?.regular} alt="" />
+            <img
+              className="rounded-l-lg bg-cover w-full"
+              src={Image?.urls?.regular}
+              alt=""
+            />
           </div>
           <div className="text-center ">
             <h5> bio : {Image?.user?.bio}</h5> <h5> views: {Image.views}</h5>
@@ -57,28 +57,23 @@ const ImageDetails = () => {
       </div>
 
       {/* ------------ */}
-   
+
       <div className="columns-4 pt-14 items-center justify-center gap-14 mx-auto h-min mb-10">
         {Images.map((img) => {
           return (
             <Link key={img.id} to={`/${img.id}`}>
-              <div className="photos hover:-translate-y-6 duration-500 cursor-pointer shadow-md rounded-t-lg bg-neutral-50 mb-10 break-inside-avoid-column">
+              <div className="photos hover:-translate-y-6 duration-500 cursor-pointer shadow-md rounded-3xl mb-10 break-inside-avoid-column bg-neutral-50">
                 <img
                   src={img.urls.small}
                   alt={img.user.name}
                   className="rounded-t-lg bg-cover w-full"
                 />
-                <figcaption className="text-center">
-                  {img.user.name}
-                </figcaption>
+                <figcaption className="text-center">{img.user.name}</figcaption>
               </div>
             </Link>
           );
         })}
       </div>
-
-
-
     </Fragment>
   );
 };

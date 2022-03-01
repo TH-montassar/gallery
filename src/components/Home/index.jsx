@@ -68,13 +68,13 @@ const Home = () => {
         {Data.map((img) => {
           return (
             <Link key={img.id} to={`/${img.id}`}>
-              <div className="photos hover:-translate-y-6 duration-500 cursor-pointer shadow-md rounded-t-lg break-inside-avoid-column bg-neutral-50 mb-10">
+              <div className="photos hover:-translate-y-6 duration-500 cursor-pointer shadow-md rounded-3xl break-inside-avoid-column bg-neutral-50 mb-10">
                 <img
                   src={img.urls.small}
                   alt={img.user.name}
                   className="rounded-t-lg bg-cover w-full"
                 />
-                <figcaption className="text-center">{img.user.name} +{img.likes}</figcaption>
+                <figcaption className="text-center ">{img.user.name} +{img.likes}</figcaption>
               </div>
             </Link>
           );
